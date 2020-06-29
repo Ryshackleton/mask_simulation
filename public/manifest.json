@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Mask Simulation",
+  "name": "COVID-19 transmission simulation with and without mask use",
   "icons": [
     {
       "src": "favicon.ico",
