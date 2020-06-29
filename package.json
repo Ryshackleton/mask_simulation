@@ -1,5 +1,6 @@
 {
   "name": "mask_simulation",
+  "homepage": "https://ryshackleton.github.io/mask_simulation/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
