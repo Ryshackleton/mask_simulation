@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.30927369.chunk.css",
-    "main.js": "/static/js/main.43445649.chunk.js",
-    "main.js.map": "/static/js/main.43445649.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.2cae29b7.js",
-    "runtime-main.js.map": "/static/js/runtime-main.2cae29b7.js.map",
-    "static/js/2.3087810e.chunk.js": "/static/js/2.3087810e.chunk.js",
-    "static/js/2.3087810e.chunk.js.map": "/static/js/2.3087810e.chunk.js.map",
-    "7b0eb5333f75fd89dcd7.worker.js": "/7b0eb5333f75fd89dcd7.worker.js",
-    "7b0eb5333f75fd89dcd7.worker.js.map": "/7b0eb5333f75fd89dcd7.worker.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.14eaaa94074b01b6b0423de4c5a5e473.js": "/precache-manifest.14eaaa94074b01b6b0423de4c5a5e473.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.30927369.chunk.css.map": "/static/css/main.30927369.chunk.css.map",
-    "static/js/2.3087810e.chunk.js.LICENSE.txt": "/static/js/2.3087810e.chunk.js.LICENSE.txt"
+    "main.css": "mask_simulation/static/css/main.30927369.chunk.css",
+    "main.js": "mask_simulation/static/js/main.e914a254.chunk.js",
+    "main.js.map": "mask_simulation/static/js/main.e914a254.chunk.js.map",
+    "runtime-main.js": "mask_simulation/static/js/runtime-main.ad45b0aa.js",
+    "runtime-main.js.map": "mask_simulation/static/js/runtime-main.ad45b0aa.js.map",
+    "static/js/2.3087810e.chunk.js": "mask_simulation/static/js/2.3087810e.chunk.js",
+    "static/js/2.3087810e.chunk.js.map": "mask_simulation/static/js/2.3087810e.chunk.js.map",
+    "25d9a82291a8c3f90802.worker.js": "mask_simulation/25d9a82291a8c3f90802.worker.js",
+    "25d9a82291a8c3f90802.worker.js.map": "mask_simulation/25d9a82291a8c3f90802.worker.js.map",
+    "index.html": "mask_simulation/index.html",
+    "precache-manifest.dfee4cf0c9d1d56e9cdf1bd13946c568.js": "mask_simulation/precache-manifest.dfee4cf0c9d1d56e9cdf1bd13946c568.js",
+    "service-worker.js": "mask_simulation/service-worker.js",
+    "static/css/main.30927369.chunk.css.map": "mask_simulation/static/css/main.30927369.chunk.css.map",
+    "static/js/2.3087810e.chunk.js.LICENSE.txt": "mask_simulation/static/js/2.3087810e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.2cae29b7.js",
+    "static/js/runtime-main.ad45b0aa.js",
     "static/js/2.3087810e.chunk.js",
     "static/css/main.30927369.chunk.css",
-    "static/js/main.43445649.chunk.js"
+    "static/js/main.e914a254.chunk.js"
   ]
 }
