@@ -3,6 +3,7 @@ import Canvas2d from '../Canvas/Canvas2d';
 import { drawNodes } from '../../hooks/useSimulation';
 
 import './MultiSimlulationContainer.scss';
+import { VirusStackedArea } from '../VirusStackedArea';
 
 const drawFunction = ({
   positionNodes = [],
@@ -34,7 +35,7 @@ export default function MultiSimulationContainer({
   return <div className="multi-simulation-container" >
     {
       virusSimulations
-      && virusSimulations.map(({ title, percentMasked, virusNodes }, index) => (
+      && virusSimulations.map(({ title, percentMasked, virusHistory, virusNodes }, index) => (
         <div className="simulation-group-container" key={`sim-canvas-${index}`} >
           <div
             className="simulation-canvas-labels"
@@ -49,6 +50,12 @@ export default function MultiSimulationContainer({
             onClick={handleClick}
             ontouchend={handleClick}
             height={height}
+            width={width}
+          />
+          <VirusStackedArea
+            nNodes={virusNodes.length}
+            virusHistory={virusHistory}
+            height={60}
             width={width}
           />
         </div>

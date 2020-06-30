@@ -7,7 +7,7 @@ export const DISEASE = {
 export const MASK = {
   NO_MASK: 0,
   NON_MEDICAL: 1,
-  MEDICAL: 2
+  MEDICAL: 2,
 };
 
 export const MASK_ATTACK_REDUCTION = {

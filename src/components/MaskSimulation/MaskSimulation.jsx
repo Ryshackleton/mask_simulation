@@ -4,22 +4,23 @@ import { MultiSimulationContainer } from '../MultiSimulationContainer';
 
 const defaultProps = {
   attackSuccessProbability: 0.05,
-  nNodes: 30,
+  historyInterval: 3,
+  nNodes: 40,
   radius: 7,
-  ticksToRecover: 1500,
-  velocity: 3,
+  ticksToRecover: 1000,
+  velocity: 3.5,
   virusSimulations: [
     {
       title: 'No mask use',
       maskedType: MASK.NON_MEDICAL,
-      nInfected: 2,
+      nInfected: 3,
       percentMasked: 0,
       maskTransmissionReduction: MASK_ATTACK_REDUCTION,
     },
     {
       title: '95% mask use',
       maskedType: MASK.NON_MEDICAL,
-      nInfected: 2,
+      nInfected: 3,
       percentMasked: 95,
       maskTransmissionReduction: MASK_ATTACK_REDUCTION,
     },
