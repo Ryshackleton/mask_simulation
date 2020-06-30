@@ -7,19 +7,20 @@ let state = {
   virusSimulations: [],
   width: 0,
   height: 0,
+  historyInterval: 3,
 };
 
 /** CONSTANTS */
-const DISEASE = ({
+const DISEASE = {
   INFECTED: 0,
   SUSCEPTIBLE: 1,
   RECOVERED: 2,
-});
+};
 
 const MASK = {
   NO_MASK: 0,
   NON_MEDICAL: 1,
-  MEDICAL: 2
+  MEDICAL: 2,
 };
 
 function dispatchMessage() {
@@ -43,6 +44,7 @@ function dispatchMessage() {
 function makeNewSimulation({
   attackSuccessProbability = 0.6,
   height = 500,
+  historyInterval = state.historyInterval,
   nNodes = 0,
   radius = 7,
   virusSimulations = [],
@@ -56,7 +58,9 @@ function makeNewSimulation({
   state.isRunning = true;
   state.isStasisReached = false;
   state.positionNodes = makeNodes(nNodes, width, height, velocity, radius);
+  state.historyInterval = historyInterval;
   state.ticksToRecover = ticksToRecover;
+
   state.virusSimulations = virusSimulations.map(({
     maskedType = MASK.NON_MEDICAL,
     nInfected = 1,
@@ -89,6 +93,7 @@ function makeNewSimulation({
 
     return {
       ...rest,
+      virusHistory: [getVirusTickData(virusNodes)],
       maskedType,
       nInfected,
       maskTransmissionReduction,
@@ -99,6 +104,20 @@ function makeNewSimulation({
   });
 }
 
+function getVirusTickData(virusNodes) {
+  const accumulator = {
+    tick: state.tick,
+    [DISEASE.INFECTED]: 0,
+    [DISEASE.SUSCEPTIBLE]: 0,
+    [DISEASE.RECOVERED]: 0,
+  };
+  return virusNodes.reduce((acc, { disease_status }) => {
+      acc[disease_status]++;
+      return acc;
+    }, accumulator
+  );
+}
+
 function tick() {
   if (state.isRunning && !state.isStasisReached) {
     const { positionNodes, virusSimulations } = state;
@@ -106,12 +125,17 @@ function tick() {
     state.isStasisReached = true;
 
     advancePositions(positionNodes, state.width, state.height);
-    virusSimulations.forEach(({ virusNodes, shouldInfect }) => {
+    state.tick++;
+    virusSimulations.forEach(({ virusHistory, virusNodes, shouldInfect }) => {
       if(advanceVirus(positionNodes, virusNodes, shouldInfect)) {
         state.isStasisReached = false;
       }
+
+      // compute totals for each state and push to history
+      if (state.tick % state.historyInterval === 0) {
+        virusHistory.push(getVirusTickData(virusNodes));
+      }
     })
-    state.tick++;
   }
 }
 
