@@ -75,11 +75,13 @@ function makeNewSimulation({
 
     // node to node transmission
     const shouldInfect = (
-      { mask_status: infectorMask },
+      randomValue, // use the same random value for infected nodes between different virus simulations
+      {
+        mask_status: infectorMask },
       { mask_status: infecteeMask }
     ) => {
       return (
-        Math.random() <= attackSuccessProbability *
+        randomValue <= attackSuccessProbability *
         maskTransmissionReduction[infectorMask] *
         maskTransmissionReduction[infecteeMask]
       );
@@ -99,7 +101,7 @@ function makeNewSimulation({
 
 function tick() {
   if (state.isRunning && !state.isStasisReached) {
-    const { height, positionNodes, virusSimulations, width } = state;
+    const { positionNodes, virusSimulations } = state;
 
     state.isStasisReached = true;
 
@@ -146,7 +148,9 @@ self.addEventListener("message", receiveMessage); // eslint-disable-line no-rest
 
 /** POSITION FUNCTIONS */
 function makeNodes(nNodes, width, height, startingVelocity, radius) {
-  return [...new Array(nNodes)].map(__ => ({
+  return [...new Array(nNodes)].map((__, index) => ({
+    index,
+    common_random_value: Math.random(),
     x: Math.random() * width * 0.9 + radius,
     y: Math.random() * height * 0.9 + radius,
     xVelocity: (Math.random() - 0.5) * startingVelocity,
@@ -156,6 +160,7 @@ function makeNodes(nNodes, width, height, startingVelocity, radius) {
 }
 
 function advancePosition(node, width, height) {
+  node.common_random_value = Math.random();
   if (node.x + node.radius > width || node.x - node.radius < 0) {
     node.xVelocity = -node.xVelocity;
   }
@@ -174,6 +179,7 @@ function advancePositions(nodes, width, height) {
 
 function makeVirusNodes(nNodes, nInfected, startingDiseaseStatus, startingMaskStatus, nMasked) {
   return [...new Array(nNodes)].map((__, index) => ({
+    index,
     ticks_infected: 0,
     disease_status: index + 1 > nInfected ? startingDiseaseStatus : DISEASE.INFECTED,
     mask_status: index < nMasked ? startingMaskStatus : MASK.NO_MASK
@@ -215,7 +221,11 @@ function advanceVirus(nodes, virusNodes, shouldInfectNode) {
   // apply infections based on attack rate
   Object.keys(contacts).forEach(infector => {
     contacts[infector].forEach(infectee => {
-      if (shouldInfectNode(virusNodes[infector], virusNodes[infectee])) {
+      if (shouldInfectNode(
+        nodes[virusNodes[infector].index].common_random_value,
+        virusNodes[infector],
+        virusNodes[infectee])
+      ) {
         virusNodes[infectee].disease_status = DISEASE.INFECTED;
       }
     });

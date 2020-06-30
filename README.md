@@ -1,68 +1,21 @@
+# Virus simulations to demonstrate the effect mask use
+
+This work was inspired by Harry Stevens's brilliant [Washington Post article](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/) simulating transmission dynamics with and without social distancing.
+
+This simulation is simpler than the model in the WaPo article, but tests the effects of mask use in the general population. The main difference is that there are no true "collisions" in the model (although they could be added). The simulation only detects when particles come in contact and treats each contact as a potential transmission.
+
+The other difference between this and the WaPo simulations is that in this model, there are multiple simulations where the positions, node-node contacts, and transmission probabilities are the same between models, but the transmission dynamics differ only by the presence or absence of masks. In this way, these simulations isolate the effect of mask use for a given set of parameters.
+
+The key assumptions are:
+* The positions and random values that determine whether an infector node can infect a susceptible node are identical between the two models. Thus differences between the models arise only from susceptibility reduction due to mask use.
+* Infected nodes have some time after which they recover (pink nodes) and are no longer susceptible
+* There is a constant "base" probability (4%) that transmission will occur between an infected and susceptible node when they come in contact.
+* The preventative effects of mask use on transmission probability are derived from [IHME's meta regression analysis of mask efficacy from the June 25th update](http://www.healthdata.org/covid/updates). For each mask wearer, we assume a transmissivity reduction of 33%, corresponding with non-medical mask use in the general population. In this model, the reduction is assumed for both the infected node (infector) and the susceptible node (infectee), although the IHME analysis only took into account reduction in transmission for the susceptible mask wearers. Several cases are provided as examples:
+  * neither infected or susceptible wear masks: 4% probability of transmission
+  * infected wears mask, susceptible doesn't wear mask: 4% * 0.67 = 3.35% probability of transmission
+  * susceptible wears mask, infector doesn't wear mask: 4% * 0.67 = 3.35% probability of transmission
+  * both infector and infectee wear mask: 4% * 0.67 * 0.67 = 2.25% probability of transmission
+* Once the transmission probability is calculated for a node-node contact, we use the same random value (associated with each infected nodes in the model) to determine whether a given node is affected (if random value <= transmission probability, infection occurs)
+* the system is closed: no nodes (people) die or are removed, and no new nodes are added
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

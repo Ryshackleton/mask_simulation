@@ -3,7 +3,7 @@ import { useSimulation, MASK, MASK_ATTACK_REDUCTION } from '../../hooks';
 import { MultiSimulationContainer } from '../MultiSimulationContainer';
 
 const defaultProps = {
-  attackSuccessProbability: 0.04,
+  attackSuccessProbability: 0.05,
   nNodes: 30,
   radius: 7,
   ticksToRecover: 1500,
