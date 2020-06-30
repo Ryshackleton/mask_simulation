@@ -1,5 +1,7 @@
 # Virus simulations to demonstrate the effect mask use
 
+Live demo [here](https://ryshackleton.github.io/mask_simulation/).
+
 This work was inspired by Harry Stevens's brilliant [Washington Post article](https://www.washingtonpost.com/graphics/2020/world/corona-simulator/) simulating transmission dynamics with and without social distancing.
 
 This simulation is simpler than the model in the WaPo article, but tests the effects of mask use in the general population. The main difference is that there are no true "collisions" in the model (although they could be added). The simulation only detects when particles come in contact and treats each contact as a potential transmission.
