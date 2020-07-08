@@ -12,13 +12,13 @@ const drawFunction = ({
 }) => ((ctx) => drawNodes(ctx, positionNodes, virusNodes));
 
 export default function MultiSimulationContainer({
+  height = 400,
   simulationState: {
     isRunning,
     isStasisReached,
     positionNodes = [],
     tick,
     virusSimulations,
-    height = 400,
   } = {},
   handleClick,
 }) {
@@ -47,7 +47,7 @@ export default function MultiSimulationContainer({
             <span className="simulation-title">{title || `${percentMasked}% mask use`}</span>
             <span className="interaction-label">{interactionMessage}</span>
           </div>
-          <div className="simulation-canvas-wrapper">
+          <div style={{ width: height, height }} className="simulation-canvas-wrapper">
             <Canvas2d
               className="simulation-canvas"
               drawFunction={drawFunction({ positionNodes, virusNodes })}
