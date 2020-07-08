@@ -33,3 +33,20 @@ export const STROKE_COLOR_BY_MASK = {
   [MASK.NON_MEDICAL]: '#000',
   [MASK.MEDICAL]: '#000'
 };
+
+export const DEFAULT_SIMULATION_PROPS = {
+  attackSuccessProbability: 0.05,
+  historyInterval: 3,
+  nNodes: 60,
+  radius: 7,
+  ticksToRecover: 1000,
+  velocity: 3.5,
+};
+
+export const DEFAULT_VIRUS_SIMULATION_PROPS = {
+  title: '',
+  maskedType: MASK.NON_MEDICAL,
+  nInfected: 3,
+  percentMasked: 0,
+  maskTransmissionReduction: MASK_ATTACK_REDUCTION,
+};
