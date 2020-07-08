@@ -22,6 +22,12 @@ export const COLOR_BY_DISEASE = {
   [DISEASE.RECOVERED]: "#CB8AC0",
 };
 
+export const LABEL_BY_DISEASE = {
+  [DISEASE.INFECTED]: 'Infected',
+  [DISEASE.SUSCEPTIBLE]: 'Healthy',
+  [DISEASE.RECOVERED]: 'Recovered',
+};
+
 export const STROKE_WIDTH_BY_MASK = {
   [MASK.NO_MASK]: 0,
   [MASK.NON_MEDICAL]: 3,

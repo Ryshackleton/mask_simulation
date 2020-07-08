@@ -4,6 +4,7 @@ import { drawNodes } from '../../hooks/useSimulation';
 
 import './MultiSimlulationContainer.scss';
 import { VirusStackedArea } from '../VirusStackedArea';
+import { VirusCounts } from '../VirusCounts';
 
 const drawFunction = ({
   positionNodes = [],
@@ -17,10 +18,9 @@ export default function MultiSimulationContainer({
     positionNodes = [],
     tick,
     virusSimulations,
+    height = 400,
   } = {},
   handleClick,
-  height,
-  width,
 }) {
   const interactionMessage = useMemo(() => {
     if (isStasisReached) {
@@ -47,20 +47,28 @@ export default function MultiSimulationContainer({
             <span className="simulation-title">{title || `${percentMasked}% mask use`}</span>
             <span className="interaction-label">{interactionMessage}</span>
           </div>
-          <Canvas2d
-            className="simulation-canvas"
-            drawFunction={drawFunction({ positionNodes, virusNodes })}
-            onClick={handleClick}
-            ontouchend={handleClick}
-            height={height}
-            width={width}
-          />
-          <VirusStackedArea
-            nNodes={virusNodes.length}
-            virusHistory={virusHistory}
-            height={60}
-            width={width}
-          />
+          <div className="simulation-canvas-wrapper">
+            <Canvas2d
+              className="simulation-canvas"
+              drawFunction={drawFunction({ positionNodes, virusNodes })}
+              onClick={handleClick}
+              ontouchend={handleClick}
+              height={height}
+              width={height}
+            />
+          </div>
+          <div className="stacked-area-with-labels-container">
+            <VirusCounts
+              virusHistory={virusHistory}
+              height={60}
+            />
+            <VirusStackedArea
+              nNodes={virusNodes.length}
+              virusHistory={virusHistory}
+              height={60}
+              width={height}
+            />
+          </div>
         </div>
       ))}
   </div>;
