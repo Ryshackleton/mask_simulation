@@ -15,6 +15,7 @@ export default function MultiSimulationContainer({
     isRunning,
     isStasisReached,
     positionNodes = [],
+    tick,
     virusSimulations,
   } = {},
   handleClick,
@@ -25,12 +26,14 @@ export default function MultiSimulationContainer({
     if (isStasisReached) {
       return '(touch to start a new simulation)';
     } else if (isRunning === true) {
-      return '(touch to pause)';
+      return '(touch to pause simulation)';
+    } else if (isRunning === false && tick === 0) {
+      return '(touch to start simulation)';
     } else if (isRunning === false) {
-      return '(touch to resume)';
+      return '(touch to resume simulation)';
     }
     return '';
-  }, [isRunning, isStasisReached]);
+  }, [isRunning, isStasisReached, tick]);
 
   return <div className="multi-simulation-container" >
     {
