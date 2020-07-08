@@ -55,7 +55,7 @@ function makeNewSimulation({
   state.width = width;
   state.height = height;
   state.tick = 0;
-  state.isRunning = true;
+  state.isRunning = false;
   state.isStasisReached = false;
   state.positionNodes = makeNodes(nNodes, width, height, velocity, radius);
   state.historyInterval = historyInterval;

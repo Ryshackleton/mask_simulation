@@ -4,6 +4,7 @@ import { drawNodes } from '../../hooks/useSimulation';
 
 import './MultiSimlulationContainer.scss';
 import { VirusStackedArea } from '../VirusStackedArea';
+import { VirusCounts } from '../VirusCounts';
 
 const drawFunction = ({
   positionNodes = [],
@@ -15,22 +16,24 @@ export default function MultiSimulationContainer({
     isRunning,
     isStasisReached,
     positionNodes = [],
+    tick,
     virusSimulations,
+    height = 400,
   } = {},
   handleClick,
-  height,
-  width,
 }) {
   const interactionMessage = useMemo(() => {
     if (isStasisReached) {
       return '(touch to start a new simulation)';
     } else if (isRunning === true) {
-      return '(touch to pause)';
+      return '(touch to pause simulation)';
+    } else if (isRunning === false && tick === 0) {
+      return '(touch to start simulation)';
     } else if (isRunning === false) {
-      return '(touch to resume)';
+      return '(touch to resume simulation)';
     }
     return '';
-  }, [isRunning, isStasisReached]);
+  }, [isRunning, isStasisReached, tick]);
 
   return <div className="multi-simulation-container" >
     {
@@ -44,20 +47,28 @@ export default function MultiSimulationContainer({
             <span className="simulation-title">{title || `${percentMasked}% mask use`}</span>
             <span className="interaction-label">{interactionMessage}</span>
           </div>
-          <Canvas2d
-            className="simulation-canvas"
-            drawFunction={drawFunction({ positionNodes, virusNodes })}
-            onClick={handleClick}
-            ontouchend={handleClick}
-            height={height}
-            width={width}
-          />
-          <VirusStackedArea
-            nNodes={virusNodes.length}
-            virusHistory={virusHistory}
-            height={60}
-            width={width}
-          />
+          <div className="simulation-canvas-wrapper">
+            <Canvas2d
+              className="simulation-canvas"
+              drawFunction={drawFunction({ positionNodes, virusNodes })}
+              onClick={handleClick}
+              ontouchend={handleClick}
+              height={height}
+              width={height}
+            />
+          </div>
+          <div className="stacked-area-with-labels-container">
+            <VirusCounts
+              virusHistory={virusHistory}
+              height={60}
+            />
+            <VirusStackedArea
+              nNodes={virusNodes.length}
+              virusHistory={virusHistory}
+              height={60}
+              width={height}
+            />
+          </div>
         </div>
       ))}
   </div>;

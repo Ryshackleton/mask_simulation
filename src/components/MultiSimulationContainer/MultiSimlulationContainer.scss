@@ -12,8 +12,15 @@
   cursor: pointer;
 }
 
+.simulation-canvas-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
 .simulation-canvas {
-  margin: 5px;
   background-color: lightgray;
   border-radius: 4px;
 }
@@ -33,5 +40,10 @@
 
 .interaction-label {
   font-size: 11px;
+}
+
+.stacked-area-with-labels-container {
+  display: flex;
+  flex-direction: row;
 }
 

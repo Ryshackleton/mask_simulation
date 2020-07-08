@@ -1,13 +1,11 @@
 import React from 'react';
-import { useMeasure } from 'react-use';
 import MaskSimulation from './MaskSimulation';
 import './MaskSimulationContainer.scss';
 
-export default function MaskSimulationContainer() {
-  const [containerRef, { height, width }] = useMeasure();
+export default function MaskSimulationContainer({ simulationProps }) {
   return (
-    <div className="mask-simulation-container" ref={containerRef} >
-      <MaskSimulation height={height} width={width} />
+    <div className="mask-simulation-container" >
+      <MaskSimulation simulationProps={simulationProps} />
     </div>
   );
 }

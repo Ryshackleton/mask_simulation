@@ -1,34 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useSimulation, MASK, MASK_ATTACK_REDUCTION } from '../../hooks';
+import {
+  useSimulation,
+  DEFAULT_SIMULATION_PROPS,
+  DEFAULT_VIRUS_SIMULATION_PROPS,
+} from '../../hooks';
 import { MultiSimulationContainer } from '../MultiSimulationContainer';
 
-const defaultProps = {
-  attackSuccessProbability: 0.05,
-  historyInterval: 3,
-  nNodes: 40,
-  radius: 7,
-  ticksToRecover: 1000,
-  velocity: 3.5,
-  virusSimulations: [
-    {
-      title: 'No mask use',
-      maskedType: MASK.NON_MEDICAL,
-      nInfected: 3,
-      percentMasked: 0,
-      maskTransmissionReduction: MASK_ATTACK_REDUCTION,
-    },
-    {
-      title: '95% mask use',
-      maskedType: MASK.NON_MEDICAL,
-      nInfected: 3,
-      percentMasked: 95,
-      maskTransmissionReduction: MASK_ATTACK_REDUCTION,
-    },
-  ],
-};
-
 export default function Simulation({
-  simulationProps = defaultProps,
+  simulationProps = {
+    ...DEFAULT_SIMULATION_PROPS,
+    virusSimulations: [{ ...DEFAULT_VIRUS_SIMULATION_PROPS,  title: 'No mask use' }],
+  },
   height: containerHeight = 400,
   margin = { top: 20, left: 20, bottom: 20, right: 20 },
   width: containerWidth = 400,

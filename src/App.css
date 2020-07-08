@@ -8,3 +8,18 @@
 .App-link {
   color: #61dafb;
 }
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.title {
+  margin: 5px;
+}
+
+.editorial-text {
+  margin: 3px 40px;
+}
