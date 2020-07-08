@@ -12,7 +12,7 @@ export default function Simulation({
     virusSimulations: [{ ...DEFAULT_VIRUS_SIMULATION_PROPS,  title: 'No mask use' }],
   },
   height: containerHeight = 400,
-  margin = { top: 20, left: 20, bottom: 20, right: 20 },
+  margin = { top: 0, left: 0, bottom: 0, right: 0 },
   width: containerWidth = 400,
 }) {
   const [simulationState, setSimulationState] = useState({});
