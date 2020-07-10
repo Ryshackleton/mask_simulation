@@ -43,6 +43,7 @@ export const STROKE_COLOR_BY_MASK = {
 export const DEFAULT_SIMULATION_PROPS = {
   attackSuccessProbability: 0.05,
   historyInterval: 3,
+  percentSociallyDistant: 0,
   nNodes: 60,
   radius: 7,
   ticksToRecover: 1000,

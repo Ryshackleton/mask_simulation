@@ -3,6 +3,7 @@ let state = {
   isRunning: false,
   tick: 0,
   maxTicks: 1000,
+  percentSociallyDistant: 0,
   positionNodes: [],
   virusSimulations: [],
   width: 0,
@@ -46,6 +47,7 @@ function makeNewSimulation({
   height = 500,
   historyInterval = state.historyInterval,
   nNodes = 0,
+  percentSociallyDistant = 0,
   radius = 7,
   virusSimulations = [],
   ticksToRecover = 1000,
@@ -57,7 +59,10 @@ function makeNewSimulation({
   state.tick = 0;
   state.isRunning = false;
   state.isStasisReached = false;
-  state.positionNodes = makeNodes(nNodes, width, height, velocity, radius);
+
+  const nSociallyDistant = Math.ceil((percentSociallyDistant / 100) * nNodes);
+  state.positionNodes = makeNodes(nNodes, width, height, velocity, radius, nSociallyDistant);
+  state.percentSociallyDistant = percentSociallyDistant;
   state.historyInterval = historyInterval;
   state.ticksToRecover = ticksToRecover;
 
@@ -171,14 +176,14 @@ function receiveMessage({ data: { action, ...rest } }) {
 self.addEventListener("message", receiveMessage); // eslint-disable-line no-restricted-globals
 
 /** POSITION FUNCTIONS */
-function makeNodes(nNodes, width, height, startingVelocity, radius) {
+function makeNodes(nNodes, width, height, startingVelocity, radius, nSociallyDistant) {
   return [...new Array(nNodes)].map((__, index) => ({
     index,
     common_random_value: Math.random(),
     x: Math.random() * width * 0.9 + radius,
     y: Math.random() * height * 0.9 + radius,
-    xVelocity: (Math.random() - 0.5) * startingVelocity,
-    yVelocity: (Math.random() - 0.5) * startingVelocity,
+    xVelocity: nNodes - index < nSociallyDistant ? 0 : (Math.random() - 0.5) * startingVelocity,
+    yVelocity: nNodes - index < nSociallyDistant ? 0 : (Math.random() - 0.5) * startingVelocity,
     radius
   }));
 }
