@@ -85,8 +85,7 @@ function makeNewSimulation({
     // node to node transmission
     const shouldInfect = (
       randomValue, // use the same random value for infected nodes between different virus simulations
-      {
-        mask_status: infectorMask },
+      { mask_status: infectorMask },
       { mask_status: infecteeMask }
     ) => {
       return (
@@ -116,11 +115,10 @@ function getVirusTickData(virusNodes) {
     [DISEASE.SUSCEPTIBLE]: 0,
     [DISEASE.RECOVERED]: 0,
   };
-  return virusNodes.reduce((acc, { disease_status }) => {
-      acc[disease_status]++;
-      return acc;
-    }, accumulator
-  );
+  for (let index = 0; index < virusNodes.length; ++index) {
+    accumulator[virusNodes[index].disease_status]++
+  }
+  return accumulator;
 }
 
 function tick() {
@@ -201,7 +199,9 @@ function advancePosition(node, width, height) {
 }
 
 function advancePositions(nodes, width, height) {
-  nodes.forEach(node => advancePosition(node, width, height));
+  for (let index = 0; index < nodes.length; ++index) {
+    advancePosition(nodes[index], width, height);
+  }
 }
 
 /** VIRUS FUNCTIONS */
