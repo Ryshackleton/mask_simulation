@@ -217,48 +217,52 @@ function makeVirusNodes(nNodes, nInfected, startingDiseaseStatus, startingMaskSt
 
 // returns true if uninfected nodes remain
 function advanceVirus(nodes, virusNodes, shouldInfectNode) {
-  const contacts = {}; // { [infectious index]: [susceptible index, susceptible index, ...] }
+  const newInfections = new Set(); // indexes of newly infected nodes
   let nInfected = 0;
   // brute force detect contacts of infected with susceptible nodes
-  nodes.forEach((circle, index) => {
+  for (let infectorIndex = 0; infectorIndex < virusNodes.length; ++infectorIndex) {
     // only perform collision detection on infected nodes
-    if (virusNodes[index].disease_status === DISEASE.INFECTED) {
-      nInfected++;
-      virusNodes[index].ticks_infected++;
-      if (virusNodes[index].ticks_infected > state.ticksToRecover) {
-        virusNodes[index].disease_status = DISEASE.RECOVERED;
-        virusNodes[index].ticks_infected = 0;
+    if (virusNodes[infectorIndex].disease_status === DISEASE.INFECTED) {
+      virusNodes[infectorIndex].ticks_infected++;
+      if (virusNodes[infectorIndex].ticks_infected > state.ticksToRecover) {
+        virusNodes[infectorIndex].disease_status = DISEASE.RECOVERED;
+        virusNodes[infectorIndex].ticks_infected = 0;
+      } else {
+        nInfected++; // only count as infected if the node will be infected in the next step
       }
 
       // all other nodes, check for susceptible nodes
-      nodes.forEach((other, otherIndex) => {
-        if (virusNodes[otherIndex].disease_status === DISEASE.SUSCEPTIBLE) {
-          // dumb proximity check
+      for (let infecteeIndex = 0; infecteeIndex < nodes.length; infecteeIndex++) {
+        if (
+          infectorIndex !== infecteeIndex // don't check self
+          && virusNodes[infecteeIndex].disease_status === DISEASE.SUSCEPTIBLE // only infect susceptible nodes
+        ) {
+          // check proximity
           if (
-            Math.abs(circle.x - other.x) < other.radius &&
-            Math.abs(circle.y - other.y) < other.radius
+            Math.sqrt(
+              (nodes[infectorIndex].x - nodes[infecteeIndex].x) * (nodes[infectorIndex].x - nodes[infecteeIndex].x)
+               + (nodes[infectorIndex].y - nodes[infecteeIndex].y) * (nodes[infectorIndex].y - nodes[infecteeIndex].y)
+            ) < nodes[infectorIndex].radius + nodes[infecteeIndex].radius
           ) {
-            contacts[index] = contacts[index] || [];
-            // add to possible list of infections
-            contacts[index].push(otherIndex);
+            if (shouldInfectNode(
+              nodes[infectorIndex].common_random_value,
+              virusNodes[infectorIndex],
+              virusNodes[infecteeIndex])
+            ) {
+              newInfections.add(infecteeIndex)
+            }
           }
         }
-      });
-    }
-  });
-
-  // apply infections based on attack rate
-  Object.keys(contacts).forEach(infector => {
-    contacts[infector].forEach(infectee => {
-      if (shouldInfectNode(
-        nodes[virusNodes[infector].index].common_random_value,
-        virusNodes[infector],
-        virusNodes[infectee])
-      ) {
-        virusNodes[infectee].disease_status = DISEASE.INFECTED;
       }
-    });
-  });
+    }
+  }
+
+  // infect new infectees
+  for (let newlyInfected of newInfections) {
+    virusNodes[newlyInfected].disease_status = DISEASE.INFECTED;
+    virusNodes[newlyInfected].ticks_infected = 0;
+    nInfected++;
+  }
 
   return nInfected !== 0;
 }
