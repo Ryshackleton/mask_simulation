@@ -4,7 +4,7 @@ import { area, scaleLinear, select, stack } from 'd3';
 import { COLOR_BY_DISEASE, DISEASE } from '../../hooks/useSimulation';
 import './VirusStackedArea.scss';
 
-const { INFECTED, SUSCEPTIBLE, RECOVERED } = DISEASE;
+const { INFECTED, SUSCEPTIBLE, RECOVERED, DEAD } = DISEASE;
 
 export default function VirusStackedArea({
   handleMouseMove,
@@ -50,7 +50,7 @@ export default function VirusStackedArea({
   }, [nNodes, height]);
 
   const series = useMemo(() => {
-    return stack().keys([INFECTED, SUSCEPTIBLE, RECOVERED])(virusHistory);
+    return stack().keys([INFECTED, SUSCEPTIBLE, RECOVERED, DEAD])(virusHistory);
   }, [virusHistory]);
 
   const areasRef = useRef();

@@ -2,6 +2,7 @@ export const DISEASE = {
   INFECTED: 0,
   SUSCEPTIBLE: 1,
   RECOVERED: 2,
+  DEAD: 3,
 };
 
 export const MASK = {
@@ -20,12 +21,14 @@ export const COLOR_BY_DISEASE = {
   [DISEASE.INFECTED]: "#BB641D",
   [DISEASE.SUSCEPTIBLE]: "#AAC6CA",
   [DISEASE.RECOVERED]: "#CB8AC0",
+  [DISEASE.DEAD]: "#d44b4b",
 };
 
 export const LABEL_BY_DISEASE = {
   [DISEASE.INFECTED]: 'Infected',
   [DISEASE.SUSCEPTIBLE]: 'Healthy',
   [DISEASE.RECOVERED]: 'Recovered',
+  [DISEASE.DEAD]: 'Dead',
 };
 
 export const STROKE_WIDTH_BY_MASK = {

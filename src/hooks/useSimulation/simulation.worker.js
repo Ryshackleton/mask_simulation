@@ -5,6 +5,7 @@ let state = {
   maxTicks: 1000,
   percentSociallyDistant: 0,
   positionNodes: [],
+  infectionFatalityRate: 0.006,
   virusSimulations: [],
   width: 0,
   height: 0,
@@ -16,6 +17,7 @@ const DISEASE = {
   INFECTED: 0,
   SUSCEPTIBLE: 1,
   RECOVERED: 2,
+  DEAD: 3,
 };
 
 const MASK = {
@@ -114,6 +116,7 @@ function getVirusTickData(virusNodes) {
     [DISEASE.INFECTED]: 0,
     [DISEASE.SUSCEPTIBLE]: 0,
     [DISEASE.RECOVERED]: 0,
+    [DISEASE.DEAD]: 0,
   };
   for (let index = 0; index < virusNodes.length; ++index) {
     accumulator[virusNodes[index].disease_status]++
@@ -225,7 +228,9 @@ function advanceVirus(nodes, virusNodes, shouldInfectNode) {
     if (virusNodes[infectorIndex].disease_status === DISEASE.INFECTED) {
       virusNodes[infectorIndex].ticks_infected++;
       if (virusNodes[infectorIndex].ticks_infected > state.ticksToRecover) {
-        virusNodes[infectorIndex].disease_status = DISEASE.RECOVERED;
+        virusNodes[infectorIndex].disease_status = nodes[infectorIndex].common_random_value < state.infectionFatalityRate
+          ? DISEASE.DEAD
+          : DISEASE.RECOVERED;
         virusNodes[infectorIndex].ticks_infected = 0;
       } else {
         nInfected++; // only count as infected if the node will be infected in the next step
