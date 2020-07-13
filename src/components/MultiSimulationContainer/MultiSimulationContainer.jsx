@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Canvas2d from '../Canvas/Canvas2d';
-import { drawNodes } from '../../hooks/useSimulation';
+import { drawNodes, SIMULATION_RUN_STATE } from '../../hooks/useSimulation';
 
 import './MultiSimlulationContainer.scss';
 import { VirusStackedArea } from '../VirusStackedArea';
@@ -8,32 +8,33 @@ import { VirusCounts } from '../VirusCounts';
 
 const drawFunction = ({
   positionNodes = [],
-  virusNodes = []
-}) => ((ctx) => drawNodes(ctx, positionNodes, virusNodes));
+  virusNodes = [],
+}) => (ctx) => {
+  drawNodes(ctx, positionNodes, virusNodes);
+};
 
 export default function MultiSimulationContainer({
   height = 400,
   simulationState: {
-    isRunning,
-    isStasisReached,
     positionNodes = [],
+    runState,
     tick,
     virusSimulations,
   } = {},
   handleClick,
 }) {
   const interactionMessage = useMemo(() => {
-    if (isStasisReached) {
+    if (runState === SIMULATION_RUN_STATE.STASIS_REACHED) {
       return '(touch to start a new simulation)';
-    } else if (isRunning === true) {
+    } else if (runState === SIMULATION_RUN_STATE.RUNNING) {
       return '(touch to pause simulation)';
-    } else if (isRunning === false && tick === 0) {
+    } else if (runState === SIMULATION_RUN_STATE.PAUSED && tick === 0) {
       return '(touch to start simulation)';
-    } else if (isRunning === false) {
+    } else if (runState === SIMULATION_RUN_STATE.PAUSED) {
       return '(touch to resume simulation)';
     }
     return '';
-  }, [isRunning, isStasisReached, tick]);
+  }, [runState, tick]);
 
   return <div className="multi-simulation-container" >
     {

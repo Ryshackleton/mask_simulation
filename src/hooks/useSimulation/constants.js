@@ -1,3 +1,9 @@
+export const SIMULATION_RUN_STATE = {
+  RUNNING: 0,
+  PAUSED: 1,
+  STASIS_REACHED: 2,
+};
+
 export const DISEASE = {
   INFECTED: 0,
   SUSCEPTIBLE: 1,

@@ -3,6 +3,7 @@ import {
   useSimulation,
   DEFAULT_SIMULATION_PROPS,
   DEFAULT_VIRUS_SIMULATION_PROPS,
+  SIMULATION_RUN_STATE,
 } from '../../hooks';
 import { MultiSimulationContainer } from '../MultiSimulationContainer';
 
@@ -37,11 +38,11 @@ export default function Simulation({
   }, [height, width, worker]);
 
   const handleClick = useCallback(() => {
-    if (simulationState.isStasisReached) {
+    if (simulationState.runState === SIMULATION_RUN_STATE.STASIS_REACHED) {
       worker.postMessage({ action: 'NEW_SIMULATION', height, width, ...simulationProps });
-    } else if (simulationState.isRunning === true) {
+    } else if (simulationState.runState === SIMULATION_RUN_STATE.RUNNING) {
       worker.postMessage({ action: 'PAUSE' });
-    } else if (simulationState.isRunning === false) {
+    } else if (simulationState.runState === SIMULATION_RUN_STATE.PAUSED) {
       worker.postMessage({ action: 'RESUME' });
     }
   }, [worker, height, width, simulationProps, simulationState]);

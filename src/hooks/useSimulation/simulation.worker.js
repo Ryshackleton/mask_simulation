@@ -1,6 +1,9 @@
+import { DISEASE, MASK, SIMULATION_RUN_STATE } from './constants';
+const { SUSCEPTIBLE, INFECTED, RECOVERED } = DISEASE;
+const { RUNNING, PAUSED, STASIS_REACHED } = SIMULATION_RUN_STATE;
+
 let state = {
-  isStasisReached: false,
-  isRunning: false,
+  runState: SIMULATION_RUN_STATE.PAUSED,
   tick: 0,
   maxTicks: 1000,
   percentSociallyDistant: 0,
@@ -11,31 +14,16 @@ let state = {
   historyInterval: 3,
 };
 
-/** CONSTANTS */
-const DISEASE = {
-  INFECTED: 0,
-  SUSCEPTIBLE: 1,
-  RECOVERED: 2,
-};
-
-const MASK = {
-  NO_MASK: 0,
-  NON_MEDICAL: 1,
-  MEDICAL: 2,
-};
-
 function dispatchMessage() {
   const {
-    isStasisReached,
-    isRunning,
+    runState,
     positionNodes,
     tick,
     virusSimulations = [],
   } = state;
   postMessage({
-    isStasisReached,
-    isRunning,
     positionNodes,
+    runState,
     tick,
      // remove shouldInfect function, which cannot be returned from worker
     virusSimulations: virusSimulations.map(({ shouldInfect, ...rest }) => rest) },
@@ -57,8 +45,7 @@ function makeNewSimulation({
   state.width = width;
   state.height = height;
   state.tick = 0;
-  state.isRunning = false;
-  state.isStasisReached = false;
+  state.runState = PAUSED;
 
   const nSociallyDistant = Math.ceil((percentSociallyDistant / 100) * nNodes);
   state.positionNodes = makeNodes(nNodes, width, height, velocity, radius, nSociallyDistant);
@@ -77,7 +64,7 @@ function makeNewSimulation({
     const virusNodes = makeVirusNodes(
       nNodes,
       nInfected,
-      DISEASE.SUSCEPTIBLE,
+      SUSCEPTIBLE,
       maskedType,
       nMasked
     );
@@ -111,9 +98,9 @@ function makeNewSimulation({
 function getVirusTickData(virusNodes) {
   const accumulator = {
     tick: state.tick,
-    [DISEASE.INFECTED]: 0,
-    [DISEASE.SUSCEPTIBLE]: 0,
-    [DISEASE.RECOVERED]: 0,
+    [INFECTED]: 0,
+    [SUSCEPTIBLE]: 0,
+    [RECOVERED]: 0,
   };
   for (let index = 0; index < virusNodes.length; ++index) {
     accumulator[virusNodes[index].disease_status]++
@@ -122,21 +109,21 @@ function getVirusTickData(virusNodes) {
 }
 
 function tick() {
-  if (state.isRunning && !state.isStasisReached) {
+  if (state.runState === RUNNING) {
     const { positionNodes, virusSimulations } = state;
 
-    state.isStasisReached = true;
+    state.runState = STASIS_REACHED;
 
     advancePositions(positionNodes, state.width, state.height);
     state.tick++;
     virusSimulations.forEach(({ virusHistory, virusNodes, shouldInfect }) => {
       if(advanceVirus(positionNodes, virusNodes, shouldInfect)) {
-        state.isStasisReached = false;
-      }
+        state.runState = RUNNING;
 
-      // compute totals for each state and push to history
-      if (state.tick % state.historyInterval === 0) {
-        virusHistory.push(getVirusTickData(virusNodes));
+        // compute totals for each state and push to history
+        if (state.tick % state.historyInterval === 0) {
+          virusHistory.push(getVirusTickData(virusNodes));
+        }
       }
     })
   }
@@ -145,10 +132,10 @@ function tick() {
 function receiveMessage({ data: { action, ...rest } }) {
   switch (action) {
     case 'PAUSE':
-      state.isRunning = false;
+      state.runState = PAUSED;
     break;
     case 'RESUME':
-      state.isRunning = true;
+      state.runState = RUNNING;
     break;
     case 'NEW_SIMULATION': {
       state = { ...state, ...rest };
