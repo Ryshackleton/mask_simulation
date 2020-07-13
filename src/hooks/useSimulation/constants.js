@@ -1,3 +1,9 @@
+export const SIMULATION_RUN_STATE = {
+  RUNNING: 0,
+  PAUSED: 1,
+  STASIS_REACHED: 2,
+};
+
 export const DISEASE = {
   INFECTED: 0,
   SUSCEPTIBLE: 1,
@@ -44,8 +50,8 @@ export const DEFAULT_SIMULATION_PROPS = {
   attackSuccessProbability: 0.05,
   historyInterval: 3,
   percentSociallyDistant: 0,
-  nNodes: 60,
-  radius: 7,
+  nNodes: 40,
+  radius: 6.5,
   ticksToRecover: 1000,
   velocity: 3.5,
 };
@@ -53,7 +59,7 @@ export const DEFAULT_SIMULATION_PROPS = {
 export const DEFAULT_VIRUS_SIMULATION_PROPS = {
   title: '',
   maskedType: MASK.NON_MEDICAL,
-  nInfected: 3,
+  nInfected: 2,
   percentMasked: 0,
   maskTransmissionReduction: MASK_ATTACK_REDUCTION,
 };
