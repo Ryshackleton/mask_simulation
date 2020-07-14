@@ -1,3 +1,4 @@
+@import '../../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 .multi-simulation-container {
   display: flex;
@@ -10,13 +11,17 @@
 .simulation-group-container {
   min-width: 300px;
   cursor: pointer;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .simulation-canvas-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 5px;
+  margin: 5px auto;
 }
 
 .simulation-canvas {

@@ -119,11 +119,12 @@ function tick() {
     virusSimulations.forEach(({ virusHistory, virusNodes, shouldInfect }) => {
       if(advanceVirus(positionNodes, virusNodes, shouldInfect)) {
         state.runState = RUNNING;
-
         // compute totals for each state and push to history
         if (state.tick % state.historyInterval === 0) {
           virusHistory.push(getVirusTickData(virusNodes));
         }
+      } else {
+        virusHistory.push(getVirusTickData(virusNodes));
       }
     })
   }

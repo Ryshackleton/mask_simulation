@@ -23,3 +23,12 @@
 .editorial-text {
   margin: 3px 40px;
 }
+
+.editorial-text li {
+  font-size: 18px;
+  list-style: none;
+}
+
+.editorial-icon {
+  font-size: 18px;
+}

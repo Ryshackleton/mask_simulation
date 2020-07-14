@@ -3,12 +3,19 @@ import {
   useSimulation,
   DEFAULT_SIMULATION_PROPS,
   DEFAULT_VIRUS_SIMULATION_PROPS,
-  SIMULATION_RUN_STATE,
+  ICON_FONT,
+  SIMULATION_RUN_STATE, ICON_FONT_WEIGHT,
 } from '../../hooks';
 import { MultiSimulationContainer } from '../MultiSimulationContainer';
+import { useAsync } from 'react-use';
+
+const { STASIS_REACHED, RUNNING, PAUSED } = SIMULATION_RUN_STATE;
 
 export default function Simulation({
-  simulationProps = {
+  simulationProps: {
+    drawNodesAsIcons,
+    ...simulationProps
+  } = {
     ...DEFAULT_SIMULATION_PROPS,
     virusSimulations: [{ ...DEFAULT_VIRUS_SIMULATION_PROPS,  title: 'No mask use' }],
   },
@@ -17,6 +24,10 @@ export default function Simulation({
   width: containerWidth = 400,
 }) {
   const [simulationState, setSimulationState] = useState({});
+  const { loading: fontLoading } = useAsync(async () => (drawNodesAsIcons
+    ? document.fonts.load(`${ICON_FONT_WEIGHT} 14px "${ICON_FONT}"`)
+    : { loading: false }
+  ), [ICON_FONT, drawNodesAsIcons]);
 
   const [height, width] = useMemo(() => {
     const isMobile = containerWidth > 600;
@@ -38,16 +49,17 @@ export default function Simulation({
   }, [height, width, worker]);
 
   const handleClick = useCallback(() => {
-    if (simulationState.runState === SIMULATION_RUN_STATE.STASIS_REACHED) {
+    if (simulationState.runState === STASIS_REACHED) {
       worker.postMessage({ action: 'NEW_SIMULATION', height, width, ...simulationProps });
-    } else if (simulationState.runState === SIMULATION_RUN_STATE.RUNNING) {
+    } else if (simulationState.runState === RUNNING) {
       worker.postMessage({ action: 'PAUSE' });
-    } else if (simulationState.runState === SIMULATION_RUN_STATE.PAUSED) {
+    } else if (simulationState.runState === PAUSED) {
       worker.postMessage({ action: 'RESUME' });
     }
   }, [worker, height, width, simulationProps, simulationState]);
 
-  return <MultiSimulationContainer
+  return !fontLoading && <MultiSimulationContainer
+    drawNodesAsIcons={drawNodesAsIcons}
     simulationState={simulationState}
     handleClick={handleClick}
     height={height}
