@@ -34,6 +34,19 @@ export const LABEL_BY_DISEASE = {
   [DISEASE.RECOVERED]: 'Recovered',
 };
 
+const defaultIcon = '\uf406'; // fa user icon
+export const ICON_BY_DISEASE = {
+  [DISEASE.INFECTED]: '\uf961', // coughing
+  [DISEASE.SUSCEPTIBLE]: defaultIcon, // default
+  [DISEASE.RECOVERED]: defaultIcon, // default
+};
+
+export const ICON_BY_MASK = {
+  [MASK.NO_MASK]: defaultIcon, // default
+  [MASK.NON_MEDICAL]: '\uf963', // mask
+  [MASK.MEDICAL]: defaultIcon, // default
+};
+
 export const STROKE_WIDTH_BY_MASK = {
   [MASK.NO_MASK]: 0,
   [MASK.NON_MEDICAL]: 3,
@@ -48,10 +61,11 @@ export const STROKE_COLOR_BY_MASK = {
 
 export const DEFAULT_SIMULATION_PROPS = {
   attackSuccessProbability: 0.05,
+  drawNodesAsIcons: true,
   historyInterval: 3,
   percentSociallyDistant: 0,
-  nNodes: 40,
-  radius: 6.5,
+  nNodes: 50,
+  radius: 6,
   ticksToRecover: 1000,
   velocity: 3.5,
 };

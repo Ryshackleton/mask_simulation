@@ -1,19 +1,15 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import Canvas2d from '../Canvas/Canvas2d';
-import { drawNodes, SIMULATION_RUN_STATE } from '../../hooks/useSimulation';
+import { drawIcons, drawCircles, SIMULATION_RUN_STATE } from '../../hooks/useSimulation';
 
 import './MultiSimlulationContainer.scss';
 import { VirusStackedArea } from '../VirusStackedArea';
 import { VirusCounts } from '../VirusCounts';
 
-const drawFunction = ({
-  positionNodes = [],
-  virusNodes = [],
-}) => (ctx) => {
-  drawNodes(ctx, positionNodes, virusNodes);
-};
+const { STASIS_REACHED, RUNNING, PAUSED } = SIMULATION_RUN_STATE;
 
 export default function MultiSimulationContainer({
+  drawNodesAsIcons = false,
   height = 400,
   simulationState: {
     positionNodes = [],
@@ -24,17 +20,25 @@ export default function MultiSimulationContainer({
   handleClick,
 }) {
   const interactionMessage = useMemo(() => {
-    if (runState === SIMULATION_RUN_STATE.STASIS_REACHED) {
+    if (runState === STASIS_REACHED) {
       return '(touch to start a new simulation)';
-    } else if (runState === SIMULATION_RUN_STATE.RUNNING) {
+    } else if (runState === RUNNING) {
       return '(touch to pause simulation)';
-    } else if (runState === SIMULATION_RUN_STATE.PAUSED && tick === 0) {
+    } else if (runState === PAUSED && tick === 0) {
       return '(touch to start simulation)';
-    } else if (runState === SIMULATION_RUN_STATE.PAUSED) {
+    } else if (runState === PAUSED) {
       return '(touch to resume simulation)';
     }
     return '';
   }, [runState, tick]);
+
+  const drawFunction = useMemo(() => {
+    return drawNodesAsIcons
+      ? ({ positionNodes = [], virusNodes = [] }) => (ctx) =>
+          drawIcons(ctx, positionNodes, virusNodes)
+      : ({ positionNodes = [], virusNodes = [] }) => (ctx) =>
+          drawCircles(ctx, positionNodes, virusNodes);
+  }, [drawNodesAsIcons]);
 
   return <div className="multi-simulation-container" >
     {
@@ -58,7 +62,7 @@ export default function MultiSimulationContainer({
               width={height}
             />
           </div>
-          <div className="stacked-area-with-labels-container">
+          <div className="stacked-area-with-labels-container" style={{ width: height }}>
             <VirusCounts
               virusHistory={virusHistory}
               height={60}
