@@ -13,10 +13,14 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/mask_simulation/no_masks" >
-          <MaskSimulation simulationProps={NO_MASKS_PROPS} />
-        </Route>
-        <Route path="/mask_simulation/no_masks_vs_masks" >
+        {['/mask_simulation/no_masks', '/no_masks'].map((path) => (
+          <Route
+            key="no_masks"
+            exact path={path}
+            render={() => <MaskSimulation simulationProps={NO_MASKS_PROPS} />}
+          />
+        ))}
+        <Route exact path="/mask_simulation/no_masks_vs_masks" >
           <MaskSimulation simulationProps={NO_MASKS_VS_MASKS_PROPS} />
         </Route>
         <Route path="/mask_simulation/no_masks_vs_masks_with_social_distancing" >
