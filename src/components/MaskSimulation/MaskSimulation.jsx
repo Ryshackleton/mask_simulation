@@ -19,9 +19,9 @@ export default function Simulation({
     ...DEFAULT_SIMULATION_PROPS,
     virusSimulations: [{ ...DEFAULT_VIRUS_SIMULATION_PROPS,  title: 'No mask use' }],
   },
-  height: containerHeight = 400,
+  height: containerHeight = 350,
   margin = { top: 0, left: 0, bottom: 0, right: 0 },
-  width: containerWidth = 400,
+  width: containerWidth = 350,
 }) {
   const [simulationState, setSimulationState] = useState({});
   const { loading: fontLoading } = useAsync(async () => (drawNodesAsIcons

@@ -64,7 +64,7 @@ export const DEFAULT_SIMULATION_PROPS = {
   drawNodesAsIcons: true,
   historyInterval: 3,
   percentSociallyDistant: 0,
-  nNodes: 50,
+  nNodes: 40,
   radius: 6,
   ticksToRecover: 1000,
   velocity: 3.5,
