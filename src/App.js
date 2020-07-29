@@ -12,6 +12,22 @@ import {
 function App() {
   return (
     <Router>
+      <Switch>
+        <Route path="/mask_simulation/no_masks" >
+          <MaskSimulation simulationProps={NO_MASKS_PROPS} />
+        </Route>
+        <Route path="/mask_simulation/no_masks_vs_masks" >
+          <MaskSimulation simulationProps={NO_MASKS_VS_MASKS_PROPS} />
+        </Route>
+        <Route path="/mask_simulation/no_masks_vs_masks_with_social_distancing" >
+          <MaskSimulation simulationProps={NO_MASKS_VS_MASKS_WITH_SOCIAL_DISTANCING_PROPS} />
+        </Route>
+        <Route path="/mask_simulation/masks_legend" >
+          <Legend isMasked={true} />
+        </Route>
+        <Route path="/mask_simulation/no_masks_legend" >
+          <Legend isMasked={false} />
+        </Route>
         <Route
           path="/"
         >
