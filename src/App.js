@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/mask_simulation/no_masks" >
+        <Route exact path="/mask_simulation/no_masks" >
           <MaskSimulation simulationProps={NO_MASKS_PROPS} />
         </Route>
         <Route path="/mask_simulation/no_masks_vs_masks" >
