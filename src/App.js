@@ -14,19 +14,29 @@ function App() {
     <Router>
       <Switch>
         <Route path="/mask_simulation/no_masks" >
-          <MaskSimulation simulationProps={NO_MASKS_PROPS} />
+          <div className="embed-wrapper">
+            <MaskSimulation simulationProps={NO_MASKS_PROPS} />
+          </div>
         </Route>
         <Route path="/mask_simulation/no_masks_vs_masks" >
-          <MaskSimulation simulationProps={NO_MASKS_VS_MASKS_PROPS} />
+          <div className="embed-wrapper">
+            <MaskSimulation simulationProps={NO_MASKS_VS_MASKS_PROPS} />
+          </div>
         </Route>
         <Route path="/mask_simulation/no_masks_vs_masks_with_social_distancing" >
-          <MaskSimulation simulationProps={NO_MASKS_VS_MASKS_WITH_SOCIAL_DISTANCING_PROPS} />
+          <div className="embed-wrapper">
+            <MaskSimulation simulationProps={NO_MASKS_VS_MASKS_WITH_SOCIAL_DISTANCING_PROPS} />
+          </div>
         </Route>
         <Route path="/mask_simulation/masks_legend" >
-          <Legend isMasked={true} />
+          <div className="embed-wrapper">
+            <Legend isMasked={true} />
+          </div>
         </Route>
         <Route path="/mask_simulation/no_masks_legend" >
-          <Legend isMasked={false} />
+          <div className="embed-wrapper">
+            <Legend isMasked={false} />
+          </div>
         </Route>
         <Route
           path="/"
