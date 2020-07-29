@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/mask_simulation/static/css/main.8fc2db47.chunk.css",
-    "main.js": "/mask_simulation/static/js/main.8c4215b7.chunk.js",
-    "main.js.map": "/mask_simulation/static/js/main.8c4215b7.chunk.js.map",
+    "main.js": "/mask_simulation/static/js/main.773c123d.chunk.js",
+    "main.js.map": "/mask_simulation/static/js/main.773c123d.chunk.js.map",
     "runtime-main.js": "/mask_simulation/static/js/runtime-main.2ed874fc.js",
     "runtime-main.js.map": "/mask_simulation/static/js/runtime-main.2ed874fc.js.map",
     "static/css/2.da6756b0.chunk.css": "/mask_simulation/static/css/2.da6756b0.chunk.css",
@@ -11,7 +11,7 @@
     "6550be473adc37541b05.worker.js": "/mask_simulation/6550be473adc37541b05.worker.js",
     "6550be473adc37541b05.worker.js.map": "/mask_simulation/6550be473adc37541b05.worker.js.map",
     "index.html": "/mask_simulation/index.html",
-    "precache-manifest.f9fe743b70adb5207a1cd347646ab57d.js": "/mask_simulation/precache-manifest.f9fe743b70adb5207a1cd347646ab57d.js",
+    "precache-manifest.4202581e7a0c382e0b5a7623b01abd3e.js": "/mask_simulation/precache-manifest.4202581e7a0c382e0b5a7623b01abd3e.js",
     "service-worker.js": "/mask_simulation/service-worker.js",
     "static/css/2.da6756b0.chunk.css.map": "/mask_simulation/static/css/2.da6756b0.chunk.css.map",
     "static/css/main.8fc2db47.chunk.css.map": "/mask_simulation/static/css/main.8fc2db47.chunk.css.map",
@@ -23,6 +23,6 @@
     "static/css/2.da6756b0.chunk.css",
     "static/js/2.dc2e52bb.chunk.js",
     "static/css/main.8fc2db47.chunk.css",
-    "static/js/main.8c4215b7.chunk.js"
+    "static/js/main.773c123d.chunk.js"
   ]
 }
