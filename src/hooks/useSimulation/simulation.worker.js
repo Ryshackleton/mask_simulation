@@ -120,18 +120,18 @@ function tick() {
   if (state.runState === RUNNING) {
     const { positionNodes, virusSimulations } = state;
 
-    state.runState = STASIS_REACHED;
+    state.runState = RUNNING;
 
     advancePositions(positionNodes, state.width, state.height);
     state.tick++;
     virusSimulations.forEach(({ virusHistory, virusNodes, shouldInfect }) => {
       if(advanceVirus(positionNodes, virusNodes, shouldInfect)) {
-        state.runState = RUNNING;
         // compute totals for each state and push to history
         if (state.tick % state.historyInterval === 0) {
           virusHistory.push(getVirusTickData(virusNodes));
         }
       } else {
+        state.runState = STASIS_REACHED;
         virusHistory.push(getVirusTickData(virusNodes));
       }
     })
