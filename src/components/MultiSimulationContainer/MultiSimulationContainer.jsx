@@ -21,13 +21,13 @@ export default function MultiSimulationContainer({
 }) {
   const interactionMessage = useMemo(() => {
     if (runState === STASIS_REACHED) {
-      return '(touch to start a new simulation)';
+      return '(click to start a new simulation)';
     } else if (runState === RUNNING) {
-      return '(touch to pause simulation)';
+      return '(click to pause simulation)';
     } else if (runState === PAUSED && tick === 0) {
-      return '(touch to start simulation)';
+      return '(click to start simulation)';
     } else if (runState === PAUSED) {
-      return '(touch to resume simulation)';
+      return '(click to resume simulation)';
     }
     return '';
   }, [runState, tick]);
