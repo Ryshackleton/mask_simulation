@@ -101,9 +101,17 @@ function getVirusTickData(virusNodes) {
     [INFECTED]: 0,
     [SUSCEPTIBLE]: 0,
     [RECOVERED]: 0,
+    r0: 0,
   };
   for (let index = 0; index < virusNodes.length; ++index) {
     accumulator[virusNodes[index].disease_status]++
+    if (virusNodes[index].disease_status === INFECTED) {
+      // compute traveling mean of infectee_count (number of nodes infected by a given infector),
+      // which is equal to the effective reproduction number (r0)
+      accumulator.r0 = accumulator.r0 + (
+        (virusNodes[index].infectee_count - accumulator.r0) / accumulator[INFECTED]
+      );
+    }
   }
   return accumulator;
 }
@@ -199,7 +207,8 @@ function makeVirusNodes(nNodes, nInfected, startingDiseaseStatus, startingMaskSt
     index,
     ticks_infected: 0,
     disease_status: index + 1 > nInfected ? startingDiseaseStatus : DISEASE.INFECTED,
-    mask_status: index < nMasked ? startingMaskStatus : MASK.NO_MASK
+    mask_status: index < nMasked ? startingMaskStatus : MASK.NO_MASK,
+    infectee_count: 0,
   }));
 }
 
@@ -238,6 +247,7 @@ function advanceVirus(nodes, virusNodes, shouldInfectNode) {
               virusNodes[infecteeIndex])
             ) {
               newInfections.add(infecteeIndex)
+              virusNodes[infectorIndex].infectee_count++;
             }
           }
         }
