@@ -3,7 +3,7 @@ import {
   DEFAULT_VIRUS_SIMULATION_PROPS,
 } from './hooks/useSimulation';
 
-export const PERCENT_SOCIALLY_DISTANT = 75;
+export const PERCENT_SOCIALLY_DISTANT = 50;
 
 export const NO_MASKS_PROPS = {
   ...DEFAULT_SIMULATION_PROPS,
@@ -40,11 +40,13 @@ export const NO_MASKS_VS_MASKS_WITH_SOCIAL_DISTANCING_PROPS = {
       ...DEFAULT_VIRUS_SIMULATION_PROPS,
       title: `No mask use, ${PERCENT_SOCIALLY_DISTANT}% social distancing`,
       percentMasked: 0,
+      nInfected: 3,
     },
     {
       ...DEFAULT_VIRUS_SIMULATION_PROPS,
       title: `95% mask use, ${PERCENT_SOCIALLY_DISTANT}% social distancing`,
       percentMasked: 95,
+      nInfected: 3,
     }
   ],
 };
