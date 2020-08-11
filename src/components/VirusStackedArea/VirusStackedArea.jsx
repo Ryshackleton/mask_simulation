@@ -72,7 +72,7 @@ export default function VirusStackedArea({
     }, [series, areasRef, transitionDuration, xScale, yScale]);
 
   return (
-    <div className="stacked-area-chart-wrapper" >
+    <div className="stacked-area-chart-wrapper" style={{ height: containerHeight }} >
       <svg
         onMouseMove={handleMouseMove}
         onTouchMove={handleTouchMove}

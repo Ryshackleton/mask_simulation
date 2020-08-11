@@ -64,10 +64,10 @@ export const DEFAULT_SIMULATION_PROPS = {
   drawNodesAsIcons: true,
   historyInterval: 3,
   percentSociallyDistant: 0,
-  nNodes: 40,
+  nNodes: 50,
   radius: 6,
-  ticksToRecover: 1000,
-  velocity: 3.5,
+  ticksToRecover: 500,
+  velocity: 2.5,
 };
 
 export const DEFAULT_VIRUS_SIMULATION_PROPS = {
