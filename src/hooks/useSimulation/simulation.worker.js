@@ -101,15 +101,15 @@ function getVirusTickData(virusNodes) {
     [INFECTED]: 0,
     [SUSCEPTIBLE]: 0,
     [RECOVERED]: 0,
-    r0: 0,
+    rEffective: 0,
   };
   for (let index = 0; index < virusNodes.length; ++index) {
     accumulator[virusNodes[index].disease_status]++
     if (virusNodes[index].disease_status === INFECTED) {
       // compute traveling mean of infectee_count (number of nodes infected by a given infector),
-      // which is equal to the effective reproduction number (r0)
-      accumulator.r0 = accumulator.r0 + (
-        (virusNodes[index].infectee_count - accumulator.r0) / accumulator[INFECTED]
+      // which is equal to the effective reproduction number (rEffective)
+      accumulator.rEffective = accumulator.rEffective + (
+        (virusNodes[index].infectee_count - accumulator.rEffective) / accumulator[INFECTED]
       );
     }
   }
