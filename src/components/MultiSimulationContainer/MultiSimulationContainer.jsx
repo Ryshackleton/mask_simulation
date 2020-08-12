@@ -65,12 +65,12 @@ export default function MultiSimulationContainer({
           <div className="stacked-area-with-labels-container" style={{ width: height }}>
             <VirusCounts
               virusHistory={virusHistory}
-              height={90}
+              height={80}
             />
             <VirusStackedArea
               nNodes={virusNodes.length}
               virusHistory={virusHistory}
-              height={90}
+              height={80}
               width={height}
             />
           </div>
