@@ -8,6 +8,12 @@
   flex-wrap: wrap;
 }
 
+@media only screen and (max-width: 800px) {
+  .multi-simulation-container {
+    flex-direction: column;
+  }
+}
+
 .simulation-group-container {
   min-width: 300px;
   cursor: pointer;
