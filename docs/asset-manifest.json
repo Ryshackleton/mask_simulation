@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/mask_simulation/static/css/main.bbd9f46d.chunk.css",
+    "main.css": "/mask_simulation/static/css/main.05bb00dd.chunk.css",
     "main.js": "/mask_simulation/static/js/main.bde3391b.chunk.js",
     "main.js.map": "/mask_simulation/static/js/main.bde3391b.chunk.js.map",
     "runtime-main.js": "/mask_simulation/static/js/runtime-main.2ed874fc.js",
@@ -11,10 +11,10 @@
     "b7f97c07e25d9c991a7e.worker.js": "/mask_simulation/b7f97c07e25d9c991a7e.worker.js",
     "b7f97c07e25d9c991a7e.worker.js.map": "/mask_simulation/b7f97c07e25d9c991a7e.worker.js.map",
     "index.html": "/mask_simulation/index.html",
-    "precache-manifest.582c1c4696871313f6eae1384e804705.js": "/mask_simulation/precache-manifest.582c1c4696871313f6eae1384e804705.js",
+    "precache-manifest.ccfb04a2541b787b193504bb8e7ad988.js": "/mask_simulation/precache-manifest.ccfb04a2541b787b193504bb8e7ad988.js",
     "service-worker.js": "/mask_simulation/service-worker.js",
     "static/css/2.da6756b0.chunk.css.map": "/mask_simulation/static/css/2.da6756b0.chunk.css.map",
-    "static/css/main.bbd9f46d.chunk.css.map": "/mask_simulation/static/css/main.bbd9f46d.chunk.css.map",
+    "static/css/main.05bb00dd.chunk.css.map": "/mask_simulation/static/css/main.05bb00dd.chunk.css.map",
     "static/js/2.dc2e52bb.chunk.js.LICENSE.txt": "/mask_simulation/static/js/2.dc2e52bb.chunk.js.LICENSE.txt",
     "static/media/MultiSimlulationContainer.scss": "/mask_simulation/static/media/fa-solid-900.f3a7d3b5.woff"
   },
@@ -22,7 +22,7 @@
     "static/js/runtime-main.2ed874fc.js",
     "static/css/2.da6756b0.chunk.css",
     "static/js/2.dc2e52bb.chunk.js",
-    "static/css/main.bbd9f46d.chunk.css",
+    "static/css/main.05bb00dd.chunk.css",
     "static/js/main.bde3391b.chunk.js"
   ]
 }
