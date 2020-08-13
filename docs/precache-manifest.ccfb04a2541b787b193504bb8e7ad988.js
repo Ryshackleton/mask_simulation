@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mask_simulation/b7f97c07e25d9c991a7e.worker.js"
   },
   {
-    "revision": "2beb32cf62888da9fdd854a2faa3ee87",
+    "revision": "3c846d569734faa74310258df4ffb84c",
     "url": "/mask_simulation/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mask_simulation/static/css/2.da6756b0.chunk.css"
   },
   {
-    "revision": "83cc63b98aa7bacdb1f3",
-    "url": "/mask_simulation/static/css/main.bbd9f46d.chunk.css"
+    "revision": "a5c61117736b9f1fc4df",
+    "url": "/mask_simulation/static/css/main.05bb00dd.chunk.css"
   },
   {
     "revision": "f70c78faa7dfd00ac6b5",
@@ -24,7 +24,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/mask_simulation/static/js/2.dc2e52bb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "83cc63b98aa7bacdb1f3",
+    "revision": "a5c61117736b9f1fc4df",
     "url": "/mask_simulation/static/js/main.bde3391b.chunk.js"
   },
   {
