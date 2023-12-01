@@ -19,7 +19,7 @@ export const MASK = {
 export const MASK_ATTACK_REDUCTION = {
   [MASK.NO_MASK]: 1, // 1 = no change in transmissivity
   [MASK.NON_MEDICAL]: 0.67,
-  [MASK.MEDICAL]: 0.55
+  [MASK.MEDICAL]: 0.55,
 };
 
 export const COLOR_BY_DISEASE = {
@@ -29,34 +29,34 @@ export const COLOR_BY_DISEASE = {
 };
 
 export const LABEL_BY_DISEASE = {
-  [DISEASE.INFECTED]: 'Infected',
-  [DISEASE.SUSCEPTIBLE]: 'Healthy',
-  [DISEASE.RECOVERED]: 'Recovered',
+  [DISEASE.INFECTED]: "Infected",
+  [DISEASE.SUSCEPTIBLE]: "Healthy",
+  [DISEASE.RECOVERED]: "Recovered",
 };
 
-const defaultIcon = '\uf406'; // fa user icon
+const defaultIcon = "\uf406"; // fa user icon
 export const ICON_BY_DISEASE = {
-  [DISEASE.INFECTED]: '\uf961', // coughing
+  [DISEASE.INFECTED]: "\ue061", // coughing
   [DISEASE.SUSCEPTIBLE]: defaultIcon, // default
   [DISEASE.RECOVERED]: defaultIcon, // default
 };
 
 export const ICON_BY_MASK = {
   [MASK.NO_MASK]: defaultIcon, // default
-  [MASK.NON_MEDICAL]: '\uf963', // mask
+  [MASK.NON_MEDICAL]: "\ue063", // mask
   [MASK.MEDICAL]: defaultIcon, // default
 };
 
 export const STROKE_WIDTH_BY_MASK = {
   [MASK.NO_MASK]: 0,
   [MASK.NON_MEDICAL]: 3,
-  [MASK.MEDICAL]: 4
+  [MASK.MEDICAL]: 4,
 };
 
 export const STROKE_COLOR_BY_MASK = {
-  [MASK.NO_MASK]: '#fff',
-  [MASK.NON_MEDICAL]: '#000',
-  [MASK.MEDICAL]: '#000'
+  [MASK.NO_MASK]: "#fff",
+  [MASK.NON_MEDICAL]: "#000",
+  [MASK.MEDICAL]: "#000",
 };
 
 export const DEFAULT_SIMULATION_PROPS = {
@@ -71,7 +71,7 @@ export const DEFAULT_SIMULATION_PROPS = {
 };
 
 export const DEFAULT_VIRUS_SIMULATION_PROPS = {
-  title: '',
+  title: "",
   maskedType: MASK.NON_MEDICAL,
   nInfected: 2,
   percentMasked: 0,
